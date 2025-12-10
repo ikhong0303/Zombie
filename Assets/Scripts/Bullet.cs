@@ -12,6 +12,8 @@ public class Bullet : MonoBehaviour
     public Player playerScript;
     public GameObject blood;
 
+    public GameObject explodeEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,11 @@ public class Bullet : MonoBehaviour
     
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.collider.CompareTag("Bullet") || collision.collider.CompareTag("Player"))
+        {
+            return;
+        }
+        Instantiate(explodeEffect, collision.contacts[0].point, Quaternion.LookRotation(collision.contacts[0].normal));
         if (collision.collider.CompareTag("Zombie")) 
         {
             playerScript.AddScore();
@@ -36,10 +43,8 @@ public class Bullet : MonoBehaviour
             collision.rigidbody.isKinematic = true;
         }
 
-        if (collision.collider.CompareTag("Bullet") || collision.collider.CompareTag("Player"))
-        {
-            return;
-        }
+
+
         Destroy(this.gameObject, 0.1f);
     }
 }

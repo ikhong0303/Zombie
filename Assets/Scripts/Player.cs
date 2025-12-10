@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform spawnPos;
 
+    public GameObject muzzleEffect;
     public GameObject particlePrefab;
 
     public int k;
@@ -71,6 +72,11 @@ public class Player : MonoBehaviour
         {
             //파티클 소환
             GameObject _bullet = Instantiate(bulletPrefab, spawnPos.position, this.transform.rotation);   //총알 소환
+            GameObject _muzzle = Instantiate(muzzleEffect, spawnPos.position, this.transform.rotation);   //총알 소환
+            GameObject _particle = Instantiate(particlePrefab, spawnPos.position, this.transform.rotation);   //총알 소환
+
+            Destroy(_muzzle, 0.5f); 
+            Destroy(_particle, 0.5f);
         }
     }
     void FixedUpdate()// 게임 플레이 버튼을 누르고 게임이 끝날 때 까지 실행
