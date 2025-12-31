@@ -43,8 +43,6 @@ public class Bullet : MonoBehaviour
             collision.rigidbody.isKinematic = true;
         }
 
-
-
         Destroy(this.gameObject, 0.1f);
     }
 }
